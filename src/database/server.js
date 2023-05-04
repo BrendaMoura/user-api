@@ -2,8 +2,7 @@
 
 import { DataTypes, Sequelize } from "sequelize"
 
-const sequelize = new Sequelize("IFAM", "usuario", "", {
-  host: "DATABASE_HOST",
+const sequelize = new Sequelize("IFAM", "root", "", {
   dialect: "mysql",
 })
 
@@ -19,9 +18,6 @@ export const conectarDatabase = () => {
 }
 
 export const Usuario = sequelize.define("usuarios", {
-  id: {
-    type: DataTypes.INTEGER,
-  },
   nome: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -36,13 +32,4 @@ export const Usuario = sequelize.define("usuarios", {
   },
 })
 
-export const criarTabela = () => {
-  sequelize
-    .sync()
-    .then(() => {
-      console.log("Tabela criada com sucesso!")
-    })
-    .catch((error) => {
-      console.error("Falha ao criar tabela! Erro: ", error)
-    })
-}
+await sequelize.sync()

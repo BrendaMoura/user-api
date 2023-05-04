@@ -1,7 +1,8 @@
-import pkg from "express"
-import { router } from "./routes/router.js"
-const { express } = pkg
-const app = express()
+import router from "./routes/router.js"
+
+import express from "express";
+const app = express();
+
 const PORT = 9000
 
 app.use(express.json())

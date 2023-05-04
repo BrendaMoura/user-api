@@ -1,7 +1,7 @@
 import { Usuario, conectarDatabase } from "../database/server.js"
 
 const UserController = {
-  async index(req, res) {
+  async findAll(req, res) {
     conectarDatabase()
     const usuarios = await Usuario.findAll()
     return res.json(usuarios)
@@ -20,19 +20,19 @@ const UserController = {
   async update(req, res) {
     conectarDatabase()
     const { login } = req.params
-    let produto = await Usuario.findOne({ where: { login: login } })
-    const resp = await produto?.save()
+    const resp = await Usuario.update(req.body, {
+      where: {
+        login: login
+      }
+    });
     return res.json(resp)
   },
   async delete(req, res) {
     conectarDatabase()
     const { login } = req.params
-    let produto = await Usuario.findOne({ where: { login: login } })
-    const resp = await produto?.destroy()
+    const resp = await Usuario.destroy({ where: { login: login } })
     return res.json(resp)
   },
 }
-
-//install mysql2
 
 export default UserController

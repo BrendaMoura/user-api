@@ -1,11 +1,9 @@
-import pkg from "express"
 import UserController from "../controllers/usuario.js"
-const { express } = pkg
-const Router = express.Router()
 
-export const router = Router()
+import express from "express";
+const router = express.Router()
 
-router.get("/users", UserController.index)
+router.get("/users", UserController.findAll)
 
 router.post("/user", UserController.create)
 
@@ -13,4 +11,6 @@ router.put("/user/:login", UserController.update)
 
 router.get("/user/:login", UserController.findByLogin)
 
-router.get("/user/:login", UserController.delete)
+router.delete("/user/:login", UserController.delete)
+
+export default router
